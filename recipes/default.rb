@@ -1,8 +1,7 @@
-#
-# Cookbook Name:: online-ruby-tutor-cookbook
-# Recipe:: default
-#
-# Copyright (C) 2014 YOUR_NAME
-# 
-# All rights reserved - Do Not Redistribute
-#
+group node['online-ruby-tutor']['group']
+
+user node['online-ruby-tutor']['user'] do
+  group node['online-ruby-tutor']['group']
+  system true
+  shell '/bin/bash'
+end
