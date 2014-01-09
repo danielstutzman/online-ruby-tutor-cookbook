@@ -36,20 +36,20 @@ postgresql_connection_info = {
   :password => node['postgresql']['password']['postgres']
 }
 
-postgresql_database 'online_ruby_tutor' do
+postgresql_database node['online-ruby-tutor']['database']['database'] do
   connection postgresql_connection_info
 end
 
-postgresql_database_user 'online_ruby_tutor' do
+postgresql_database_user node['online-ruby-tutor']['database']['username'] do
   connection    postgresql_connection_info
-  password      'online_ruby_tutor'
+  password      node['online-ruby-tutor']['database']['password']
   action        :create
 end
 
-postgresql_database_user 'online_ruby_tutor' do
+postgresql_database_user node['online-ruby-tutor']['database']['username'] do
   connection    postgresql_connection_info
-  password      'online_ruby_tutor'
-  database_name 'online_ruby_tutor'
+  database_name node['online-ruby-tutor']['database']['database']
+  password      node['online-ruby-tutor']['database']['password']
   privileges    [:all]
   action        :grant
 end
