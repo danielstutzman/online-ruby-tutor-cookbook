@@ -22,4 +22,34 @@ service 'nginx' do
   action :start
 end
 
+apt_package 'libpq-dev' do
+  action :install
+end
+
 include_recipe 'postgresql::server'
+include_recipe 'database::postgresql'
+
+postgresql_connection_info = {
+  :host     => '127.0.0.1',
+  :port     => node['postgresql']['config']['port'],
+  :username => 'postgres',
+  :password => node['postgresql']['password']['postgres']
+}
+
+postgresql_database 'online_ruby_tutor' do
+  connection postgresql_connection_info
+end
+
+postgresql_database_user 'online_ruby_tutor' do
+  connection    postgresql_connection_info
+  password      'online_ruby_tutor'
+  action        :create
+end
+
+postgresql_database_user 'online_ruby_tutor' do
+  connection    postgresql_connection_info
+  password      'online_ruby_tutor'
+  database_name 'online_ruby_tutor'
+  privileges    [:all]
+  action        :grant
+end

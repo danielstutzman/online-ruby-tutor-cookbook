@@ -19,7 +19,8 @@ Vagrant.configure("2") do |config|
       },
       :postgresql => {
         :password => {
-          :postgres => 'postgres'
+          :postgres => 'postgres',
+          :online_ruby_tutor => 'online_ruby_tutor'
         }
       }
     }
